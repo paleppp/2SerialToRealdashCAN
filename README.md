@@ -5,6 +5,10 @@ Then passes the data with Realdash CAN to Realdash. Testing has been done with C
 Code is designed to use ESP32 DEVKIT V1 38PIN Board and 8 channel Optocoupler. And optocoupler is used to input dash warning lights also to the CAN protocol. But you can add what input you like.
 
 
+2SerialToRealdashCAN_confiq.xml
+
+This file is used by Realdash to getting it read the custom channel configuration. Just need to add it in Garage -> Connections -> Realdash CAN -> Custom Channel Description 
+
 
 Schematic: Coming soon!
 
