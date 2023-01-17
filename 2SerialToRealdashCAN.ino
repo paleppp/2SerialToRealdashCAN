@@ -142,11 +142,11 @@ uint8_t SpeedyResponse[120]; //The data buffer for the serial3 data. This is lon
  #define HIGHBEAM 27
  #define TURNSIGLEFT 32
  #define TURNSIGRIGHT 33
- #define BRAKEWARN 0
+ #define BRAKEWARN 25
 
- #define OILPRESS 0
+ #define OILPRESS 26
  #define ALTERNATORWARN 0
- #define FUELLEVEL 0
+ #define FUELLEVEL 35
 
 // -------------------------------------------------------------------------------------------------------------
 
@@ -175,7 +175,7 @@ void setup()
   pinMode(LED_BUILTIN, OUTPUT);
 
   // This runs only if Debugging is set = true
-  if (debug == true) {
+  if (debug == false) {
   Serial.begin(115200); // For Debugging in Serial Monitor
     } else { 
   }
@@ -328,6 +328,7 @@ void processData(){
     tempRPM = currentStatus.RPM; // RPM conversion factor for e46/e39 cluster
   }
 }
+
 // Handle the serial "n" command reading and processing and sending data further into Realdash
 void HandleN()
 {
@@ -478,6 +479,8 @@ void ReadAnalogStatuses()
   for (int i=0; i<7; i++)
   {
     analogPins[i] = analogRead(i);
+    FuelLevel = analogRead(35);
+    FuelLevel = map(FuelLevel, 0, 4095, 0, 100);
   }
 }
 
@@ -681,7 +684,7 @@ void SendCANFramesToSerial()
 
     // build Arduino pin CAN frame, Arduino digital pin and 3 analog values
   memcpy(buf, &AlternatorWarn, 2);
-  memcpy(buf + 2, &analogPins[1], 2);
+  memcpy(buf + 2, &FuelLevel, 2);
   memcpy(buf + 4, &analogPins[2], 2);
   memcpy(buf + 6, &analogPins[3], 2);
 
