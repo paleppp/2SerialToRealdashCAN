@@ -200,8 +200,7 @@ void setup()
   pinMode(ALTERNATORWARN, INPUT_PULLUP);
   pinMode(FUELLEVEL, INPUT);
 
-  //delay(100);
-  //Serial.println ("Version date: 24.3.2022"); // To see from debug serial when is used code created.
+  Serial.println ("Version date: 15.1.2023"); // To see from debug serial when is used code created.
   requestData(); // all set. Start requesting data from speeduino
 }
 
@@ -376,10 +375,10 @@ void ReadSerial()
   currentCommand = Serial2.read(); // 'n' <-- DEC 110
   switch (currentCommand)
   {
-    case 'n':  // Speeduino sends data in A-message
+    case 'n':  // Speeduino sends data in n-message
       SerialState = N_MESSAGE;
     break;
-    case 'R':  // Speeduino requests data in A-message
+    case 'R':  // Speeduino requests data in n-message
       SerialState = R_MESSAGE;
     break;
     default:
@@ -398,7 +397,7 @@ void loop()
       if (Serial2.available() > 0) { ReadSerial(); }  // read bytes from serial3 to define what message speeduino is sending.
       break;
     case N_MESSAGE:
-      if (Serial2.available() >= 118) { HandleN(); }  // read and process the A-message from serial3, when it's fully received.
+      if (Serial2.available() >= 118) { HandleN(); }  // read and process the n-message from serial3, when it's fully received.
       break;
     case R_MESSAGE:
       //if (Serial2.available() >= 118) { HandleN(); }  // read and process the A-message from serial3, when it's fully received.
