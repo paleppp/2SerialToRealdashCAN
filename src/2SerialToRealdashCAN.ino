@@ -3,7 +3,7 @@
  *  Name        : 2SerialToRealdashCAN
  *  Author      : paleppp
  *  Created     : 15.1.2023
- *  
+ *
  * Reading Speeduino Secondary Serial with broader realtime dataset command "n".
  * Then send data to Realdash CAN via UART-USB adapter. You can also add custom inputs to Realdash with this.
  * Code is designed to use ESP32 DEVKIT V1 38PIN Board and 8 channel Optocoupler
@@ -11,6 +11,8 @@
  * This code is based of 'Realdash Arduino CAN example' and pazi88's 'Serial3toBMWcan' and modified by paleppp.
  * ============================================================================
 **/
+
+// Test for Github
 
 #include "Arduino.h"
 
@@ -123,7 +125,7 @@ static uint32_t oldtime=millis(); // for the timeout
 uint8_t SpeedyResponse[120]; //The data buffer for the serial3 data. This is longer than needed, just in case
 // -------------------------------------------------------------------------------------------------------------
 
-// Variables for inputs 
+// Variables for inputs
 // -------------------------------------------------------------------------------------------------------------
 
  unsigned int digitalPins = 0;
@@ -132,12 +134,12 @@ uint8_t SpeedyResponse[120]; //The data buffer for the serial3 data. This is lon
  unsigned int OilPress = 0;
  unsigned int AlternatorWarn = 0;
  unsigned int FuelLevel;
- 
+
  int analogPins[7] = {0};
 // -------------------------------------------------------------------------------------------------------------
 
 // Pinout list
-// ------------------------------------------------------------------------------------------------------------- 
+// -------------------------------------------------------------------------------------------------------------
 
  #define HIGHBEAM 27
  #define TURNSIGLEFT 32
@@ -164,7 +166,7 @@ uint32_t end;
 
 // -------------------------------------------------------------------------------------------------------------
 
-// Speeduino data request command 
+// Speeduino data request command
 void requestData() {
 
   Serial2.write("n"); // Send n to request real time data
@@ -177,7 +179,7 @@ void setup()
   // This runs only if Debugging is set = true
   if (debug == false) {
   Serial.begin(115200); // For Debugging in Serial Monitor
-    } else { 
+    } else {
   }
 
   //Init Serials for reading Speeduino and sending data further to Realdash
@@ -239,14 +241,14 @@ void processData(){
   currentStatus.wueCorrection = SpeedyResponse[13];
 
   currentStatus.RPM = ((SpeedyResponse [15] << 8) | (SpeedyResponse [14]));
-  
+
   currentStatus.TAEamount = SpeedyResponse[16];
   currentStatus.corrections = SpeedyResponse[17];
   currentStatus.ve = SpeedyResponse[18];
   currentStatus.afrTarget = SpeedyResponse[19];
 
   currentStatus.PW1 = ((SpeedyResponse [21] << 8) | (SpeedyResponse [20]));
-  
+
   currentStatus.tpsDOT = SpeedyResponse[22];
   currentStatus.advance = SpeedyResponse[23];
   currentStatus.TPS = SpeedyResponse[24];
@@ -346,7 +348,7 @@ void HandleN()
   processData();
   if (debug == true) {
     displayData(); // only required for debugging
-    } else { 
+    } else {
   }
 
   requestData();  // restart data reading
@@ -409,7 +411,7 @@ void loop()
     oldtime = millis();
     Serial.println ("Timeout from speeduino!");
     requestData();                // restart data reading
-    
+
   }
 
 // ---- OLD METHOD ---- | This requires to commenting the whole >> switch (SerialState) << out! | Also uncomment >> Serial2.read << from HandleN
@@ -690,7 +692,7 @@ void SendCANFramesToSerial()
 
   // write 2nd CAN frame to serial
   SendCANFrameToSerial(3223, buf);
-  
+
 /*
   // build 3rd CAN frame, rest of Arduino analog values
   memcpy(buf, &analogPins[3], 2);
