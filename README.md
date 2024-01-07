@@ -7,7 +7,7 @@ Code is designed to use ESP32 DEVKIT V1 38PIN Board and 8 channel Optocoupler. A
 
 2SerialToRealdashCAN_confiq.xml
 
-This file is used by Realdash to getting it read the custom channel configuration. Just need to add it in Garage -> Connections -> Realdash CAN -> Custom Channel Description 
+This file is used by Realdash to getting it read the custom channel configuration. Just add it in Realdash -> Garage -> Connections -> Realdash CAN -> Custom Channel Description 
 
 Schematic: 
 ![RealdashCAN-Guide2](https://github.com/paleppp/2SerialToRealdashCAN/assets/116177715/b2e8639f-aa11-42ea-a0ff-aba49fd9f154)
