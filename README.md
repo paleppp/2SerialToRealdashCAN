@@ -12,7 +12,7 @@ This file is used by Realdash to getting it read the custom channel configuratio
 Schematic: 
 ![RealdashCAN-Guide2](https://github.com/paleppp/2SerialToRealdashCAN/assets/116177715/b2e8639f-aa11-42ea-a0ff-aba49fd9f154)
 
-This is how i'm personally set it up. Polarity of the warning lights matters only in a optocoupler input side since they have shared grounding.  
+This is how i have personally set it up. Polarity of the warning/indicator lights matters only in a optocoupler input side, since the boards have shared grounding on input side.  
 
 
 This code is based of janimm 'Realdash Arduino CAN example' and pazi88 'Serial3toBMWcan' and modified by paleppp.
